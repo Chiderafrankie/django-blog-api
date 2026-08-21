@@ -1,9 +1,5 @@
 from django.contrib import admin
-from .models import Category, Tag, Post, Like, Bookmark
-
-
-class CategoryAdmin(admin.ModelAdmin):
-    exclude = ('slug',)
+from .models import Tag, Post, Like, Bookmark
 
 
 class TagAdmin(admin.ModelAdmin):
@@ -14,7 +10,6 @@ class PostAdmin(admin.ModelAdmin):
     exclude = ('slug',)
 
 
-admin.site.register(Category, CategoryAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Like)

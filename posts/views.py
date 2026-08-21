@@ -2,14 +2,8 @@ from rest_framework import viewsets, permissions, generics, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.db.models import Q
-from .models import Category, Tag, Post, Like, Bookmark
-from .serializers import CategorySerializer, TagSerializer, PostSerializer
-
-
-class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+from .models import Tag, Post, Like, Bookmark
+from .serializers import TagSerializer, PostSerializer
 
 
 class TagViewSet(viewsets.ModelViewSet):
@@ -50,6 +44,7 @@ class PostViewSet(viewsets.ModelViewSet):
             bookmark.delete()
             return Response({'bookmarked': False}, status=status.HTTP_200_OK)
         return Response({'bookmarked': True}, status=status.HTTP_201_CREATED)
+
 
 class Trendingview(generics.ListAPIView):
     serializer_class = PostSerializer

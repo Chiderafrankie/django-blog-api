@@ -1,9 +1,8 @@
 from rest_framework.routers import DefaultRouter
 from django.urls import path
-from .views import CategoryViewSet, TagViewSet, PostViewSet, HomeView, SearchView, Trendingview
+from .views import TagViewSet, PostViewSet, HomeView, SearchView, Trendingview
 
 router = DefaultRouter()
-router.register(r'categories', CategoryViewSet, basename='category')
 router.register(r'tags', TagViewSet, basename='tag')
 router.register(r'posts', PostViewSet, basename='post')
 
