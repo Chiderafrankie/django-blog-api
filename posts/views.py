@@ -6,6 +6,20 @@ from .models import Tag, Post, Like, Bookmark
 from .serializers import TagSerializer, PostSerializer
 
 
+def home_page(request):
+    posts = Post.objects.filter(status='published').order_by('-created_at')
+    return render(request, 'home.html', {'posts': posts})
+
+def trending_page(request):
+    posts = Post.objects.filter(status='published').order_by('-view_count')[:10]
+    return render(request, 'trending.html', {'posts': posts})
+
+def post_detail_page(request, pk):
+    post = Post.objects.get(pk=pk)
+    post.view_count += 1
+    post.save()
+    return render(request, 'post_detail.html', {'post': post})
+
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
